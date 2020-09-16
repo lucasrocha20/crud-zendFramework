@@ -1,6 +1,7 @@
 <?php
 
 namespace Person;
+
 use Zend\Router\Http\Segment;
 use Zend\ServiceManager\Factory\InvokableFactory;
 
@@ -12,7 +13,7 @@ return [
                 'options' => [
                     'route' => '/person[/:action[/:id]]',
                     'constraints' => [
-                        'action' => '[a-zA-Z][a-ZA-Z0-9_-]*',
+                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
                         'id' => '[0-9]+',
                     ],
                     'defaults' => [
