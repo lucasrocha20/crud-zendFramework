@@ -38,7 +38,7 @@ return [
     	'driver' => 'Pdo_Mysql',
         'database' => 'zend',
         'username' => 'root',
-        'password' => 'senhafoda123',
+        'password' => 'root',
         'hostname' => 'localhost'
     ]
 ];

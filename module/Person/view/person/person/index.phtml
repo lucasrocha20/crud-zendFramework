@@ -1,7 +1,21 @@
 <?php
-    $var = "Lucas";
-    var_dump($persons);
+   
 ?>
 
-<h1>Minha view</h1>
-<p><?=$var?></p>
+<h1>Lista de pessoas</h1>
+<table class="table table-stripped">
+    <tr>
+        <th>Código</th>
+        <th>Nome</th>
+    <tr>
+<?php
+    foreach($persons as $pes) {
+?>
+    <tr>
+        <td><?=$pes->getId()?></td>
+        <td><?=$pes->getName()?></td>
+    </tr>
+<?php
+    }
+?>
+</table>
