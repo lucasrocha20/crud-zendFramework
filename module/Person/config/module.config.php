@@ -26,7 +26,7 @@ return [
     ],
     'controllers' => [
         'factories' => [
-            Controller\PersonController::class => InvokableFactory::class,
+            // Controller\PersonController::class => InvokableFactory::class,
         ],
     ],
     'view_manager' => [
@@ -34,4 +34,11 @@ return [
             'person' => __DIR__ . '/../view',
         ],
     ],
+    'db' => [
+    	'driver' => 'Pdo_Mysql',
+        'database' => 'zend',
+        'username' => 'root',
+        'password' => 'senhafoda123',
+        'hostname' => 'localhost'
+    ]
 ];
