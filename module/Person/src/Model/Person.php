@@ -2,7 +2,9 @@
 
 namespace Person\Model;
 
-class Person {
+use \Zend\Stdlib\ArraySerializableInterface;
+
+class Person implements ArraySerializableInterface{
 
     private $id;
     private $name;
@@ -56,5 +58,15 @@ class Person {
 
     public function setSituation($situation) {
         $this->situation = $situation;
+    }
+
+    public function getArrayCopy(): array {
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+            'surname' => $this->surname,
+            'email' => $this->email,
+            'situation' => $this->situation,
+        ];
     }
 }

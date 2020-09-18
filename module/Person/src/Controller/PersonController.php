@@ -34,9 +34,9 @@ class PersonController extends AbstractActionController {
             return new ViewModel(['form'=>$form]);
         }
 
-        $person->exchangeArray($form->getData());
+        // $person->exchangeArray($form->getData());
 
-        $this->table->savePerson($person);
+        $this->table->savePerson($form->getData());
 
         return $this->redirect()->toRoute('person');
     }
@@ -46,6 +46,38 @@ class PersonController extends AbstractActionController {
     }
 
     public function editAction() {
+        $id = (int) $this->params()->fromRoute('id',0);
+
+        if($id === 0) {
+            return $this->redirect()->toRoute('person',['action'=>'add']);
+        }
+
+        try {
+            $person = $this->table->getPerson($id);
+        } catch(Exception $err) {
+            return $this->redirect()->toRoute('person',['action'=>'index']);
+        }
+
+        $form = new PersonForm();
+        $form->bind($person);
+        $form->get('submit')->setAttribute('value', 'Salvar');
+   
+        $request = $this->getRequest();
+        $viewData = ['id'=>$id, 'form'=>$form];
+     
+        if(!$request->isPost()) {
+            return $viewData;
+        }
+    
+        $form->setData($request->getPost());
+        if(!$form->isValid()) {
+            return $viewData;
+        }
+  
+        $person->exchangeArray($form->getData());
+        $this->table->savePerson($person);
+        return $this->redirect()->toRoute('person');
+
         return new ViewModel();
     }
 
