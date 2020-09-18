@@ -2,6 +2,7 @@
 
 namespace Person\Controller;
 
+use Person\Form\PersonForm;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
@@ -18,7 +19,26 @@ class PersonController extends AbstractActionController {
     }
 
     public function addAction() {
-        return new ViewModel();
+        $form = new PersonForm();
+        $form->get('submit')->setValue('Adicionar');
+        $request = $this->getRequest();
+
+        if(!$request->isPost()) {
+            return new ViewModel(['form'=>$form]);
+        }
+
+        $person = new \Person\Model\Person();
+        $form->setData($request->getPost());
+
+        if(!$form->isValid()) {
+            return new ViewModel(['form'=>$form]);
+        }
+
+        $person->exchangeArray($form->getData());
+
+        $this->table->savePerson($person);
+
+        return $this->redirect()->toRoute('person');
     }
 
     public function saveAction() {

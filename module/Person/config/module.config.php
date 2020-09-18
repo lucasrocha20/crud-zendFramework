@@ -39,6 +39,6 @@ return [
         'database' => 'zend',
         'username' => 'root',
         'password' => 'root',
-        'hostname' => 'localhost'
+        'hostname' => '127.0.0.1'
     ]
 ];
