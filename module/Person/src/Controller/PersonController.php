@@ -41,10 +41,6 @@ class PersonController extends AbstractActionController {
         return $this->redirect()->toRoute('person');
     }
 
-    public function saveAction() {
-        return new ViewModel();
-    }
-
     public function editAction() {
         $id = (int) $this->params()->fromRoute('id',0);
 
@@ -82,10 +78,25 @@ class PersonController extends AbstractActionController {
     }
 
     public function removeAction() {
-        return new ViewModel();
-    }
+        $id = (int) $this->params()->fromRoute('id',0);
 
-    public function confirmationAction() {
-        return new ViewModel();
+        if($id === 0) {
+            return $this->redirect()->toRoute('person');
+        }
+
+        $request = $this->getRequest();
+
+        if ($request->isPost()) {
+            $del = $request->getPost('del', 'Não');
+
+            if($del == 'Sim') {
+                $id = (int) $request->getPost('id');
+                $this->table->deletePerson($id);
+            }
+
+            return $this->redirect()->toRoute('person');
+        }
+
+        return ['id' => $id, 'person' => $this->table->getPerson($id)];
     }
 }

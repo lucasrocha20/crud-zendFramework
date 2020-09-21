@@ -18,9 +18,8 @@
         <td><?=$pes->getId()?></td>
         <td><?=$pes->getName()?></td>
         <td>
-            <a href="<?=$this->url('person',['action'=>'edit', 'id'=>$pes->getId()])?>" class="btn btn-info">
-                <i class="gryphicon gryphicon-edit"></i>
-            </a>
+            <a href="<?=$this->url('person',['action'=>'edit','id'=>$pes->getId()])?>" class="btn btn-info"><i class="glyphicon glyphicon-edit"></i></a>
+            <a href="<?=$this->url('person',['action'=>'remove','id'=>$pes->getId()])?>" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i></a>
         </td>
     </tr>
 <?php
