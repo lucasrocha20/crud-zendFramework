@@ -74,7 +74,7 @@ class PersonController extends AbstractActionController {
             return $viewData;
         }
   
-        $person->exchangeArray($form->getData());
+        // $person->exchangeArray($form->getData());
         $this->table->savePerson($person);
         return $this->redirect()->toRoute('person');
 
